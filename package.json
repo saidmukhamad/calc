@@ -1,0 +1,14 @@
+{
+  "name": "calc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test index.test.js",
+    "start": "node index.js",
+    "start:server": "node index.js --server"
+  },
+  "type": "module",
+  "author": "saidmukhamad",
+  "license": "ISC"
+}

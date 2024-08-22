@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      input,
+      button {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+      #result {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Calculator</h1>
+    <input type="text" id="expression" placeholder="Enter expression" />
+    <button onclick="calculate()">Calculate</button>
+    <p>Result: <span id="result"></span></p>
+
+    <script>
+      async function calculate() {
+        const expression = document.getElementById("expression").value;
+        const response = await fetch("/calculate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ expression }),
+        });
+        const data = await response.json();
+        if (typeof data.result === "string" && data.result.toLowerCase().includes("youtube")) {
+          // Redirect to YouTube
+          window.location.href = data.result;
+        } else {
+          document.getElementById("result").textContent = data.result;
+        }
+      }
+    </script>
+  </body>
+</html>
